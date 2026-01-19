@@ -58,7 +58,7 @@ class SetwiseLlmRanker(LlmRanker):
                                                                      return_tensors="pt",
                                                                      add_special_tokens=False,
                                                                      padding=True).input_ids[:, -1]
-        elif self.config.model_type == 'llama':
+        elif self.config.model_type in ['llama', 'mistral', 'qwen3', 'gemma3']:
             self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, cache_dir=cache_dir)
             self.tokenizer.use_default_system_prompt = False
             if 'vicuna' and 'v1.5' in model_name_or_path:
@@ -182,7 +182,7 @@ class SetwiseLlmRanker(LlmRanker):
                         else:
                             output = self.CHARACTERS[random.choice(most_common_candidates)]
 
-            elif self.config.model_type == 'llama':
+            elif self.config.model_type in ['llama', 'mistral', 'qwen3', 'gemma3']:
                 conversation = [{"role": "user", "content": input_text}]
 
                 prompt = self.tokenizer.apply_chat_template(conversation, tokenize=False, add_generation_prompt=True)
