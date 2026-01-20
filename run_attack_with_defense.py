@@ -223,6 +223,7 @@ def main(args):
     toc = time.time()
 
     print(f'Avg comparisons: {total_comparisons/len(reranked_results)}')
+    print(f'Avg input token length: {total_prompt_tokens/total_comparisons}')
     print(f'Avg prompt tokens: {total_prompt_tokens/len(reranked_results)}')
     print(f'Avg completion tokens: {total_completion_tokens/len(reranked_results)}')
     print(f'Avg time per query: {(toc-tic)/len(reranked_results)}')
